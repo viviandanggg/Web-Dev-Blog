@@ -3,7 +3,7 @@
     font-weight: 300;
 }
 
-.body-font, #main-cont-body {
+.body-font, #main-cont-body, figcaption, .body-text, .prop-value-list, ul {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
 }
@@ -29,8 +29,6 @@ a:hover {
 
 ul {
     list-style-type: none;
-    font-family: 'Playfair Display', serif;
-    font-weight: 300;
     padding: 0;
 }
 
@@ -67,12 +65,13 @@ footer {
 h2 {
     color: cadetblue;
     font-size: 4vh;
+    margin: 24px 0px 0px 0px;
 }
 
 .main-container {
     background-color: cadetblue;
     width: 100%;
-    margin: 20px 0px 20px 0px;
+    margin: 20px 0px;
     display: table;
 }
 
@@ -107,4 +106,44 @@ h2 {
 .weekly-content {
     height: 60vh;
 }
+
+h3 {
+    color: lightgray;
+    margin: 5px 0px 8px;
+    font-size: 1em;
+}
+
+#homepage-img {
+    margin: 0px 20px;
+    border: lightgray solid;
+    width: 97%;
+}
+
+figcaption {
+    font-size: 12px;
+    margin: 0px 20px;
+}
+
+.body-text {
+    margin: 0px 60px;
+}
+
+.prop-value-list {
+    font-size: inherit;
+    margin: 0px 100px;
+}
+
+.prop-value {
+    color: cadetblue;
+}
+
+.code {
+    margin: 20px 100px;
+}
+
+.body-container {
+    height: 50%;
+    margin: 0px 0px 50px 0px;
+}
+
 

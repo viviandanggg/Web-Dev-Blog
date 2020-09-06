@@ -28,6 +28,150 @@
                 </ul>
             </div>
             <h2 class="heading-font">WEEK 1 BLOG</h2>
+            <h3 class="heading-font">Display Properties | Sept 11, 2020</h3>
+            <figure>
+                <img id="homepage-img" src="images/homepage.png" alt="homepage">
+                <figcaption>Homepage of the Website</figcaption>
+            </figure>
+            <div class="body-container">
+                <p class="body-text">
+                    To create the homepage and horizontal navigation bar for this blog, I explored the CSS <span class="prop-value">display</span> property. This property defines the display behavior of elements. Property values include:
+                    <ul>
+                        <li class="prop-value-list"><span class="prop-value">inline</span>: Displays elements as inline elements</li>
+                        <li class="prop-value-list"><span class="prop-value">block</span>: Displays elements as block elements</li>
+                        <li class="prop-value-list"><span class="prop-value">inline-block</span>: Displays elements as block elements on the same level as inline elements</li>
+                        <li class="prop-value-list"><span class="prop-value">table</span>: Displays elements as &#60;table&#62; elements</li>
+                        <li class="prop-value-list"><span class="prop-value">table-cell</span>: Displays elements as data in a &#60;table&#62; element</li>
+                        <li class="prop-value-list">("CSS Display Property", n.d.)</li>
+                    </ul>
+                </p>
+                <p class="body-text">
+                    Specifically, to create the horizontal navigation bar ("CSS Horizontal Navigation Bar", n.d.), I used the <span class="prop-value">inline</span> display value. In HTML, the content of the navigation bar starts off as an unordered list of hyperlinks and their associated titles. 
+                    <pre class="code">
+&#60;div class="nav-bar"&#62;
+    &#60;ul&#62;
+        &#60;li class="nav-content"&#62;&#60;a href="index.html" title="Home"&#62;HOME&#60;&#47;a&#62;&#60;&#47;li&#62;
+        &#60;li class="nav-content"&#62;&#60;a href="week1.html" title="New Post"&#62;NEW POST&#60;&#47;a&#62;&#60;&#47;li&#62;
+        &#60;li class="nav-content"&#62;&#60;a href="weeklyblog.html" title="Weekly Blogs"&#62;WEEKLY BLOGS&#60;/a&#62;&#60;&#47;li&#62;
+        &#60;li class="nav-content"&#62;&#60;a href="about.html" title="About"&#62;ABOUT&#60;&#47;a&#62;&#60;&#47;li&#62;
+    &#60;&#47;ul&#62;
+&#60;&#47;div&#62;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    In CSS, I set the unordered list's property, <span class="prop-value">list-style-type</span>, to <span class="prop-value">none</span>. 
+                    This gets rid of the default bullet points associated with unordered lists.
+                    I also set the unordered list's <span class="prop-value">padding</span> value to 0, which removes the default indentation that unordered lists have.
+                    <pre class="code">
+ul {
+    list-style-type: none;
+    padding: 0;
+}                      
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Additionally, I used the <span class="prop-value">inline</span> property value to position all of the items in the unordered list side-by-side. 
+                    This was applied to the individual &#60;li&#62; elements.
+                    By default, unordered lists are block elements, meaning that each element starts on a new line.
+                    I also set the &#60;li&#62; elements' <span class="prop-value">padding</span> property to 10px, which maintains some spacing between the titles.
+                <pre class="code">
+.nav-content {
+    display: inline;
+    padding: 10px;
+}                    
+                </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, to center the navigation bar under the header, I targeted the ul tag that's a descendent of the .nav-bar class and set it's <span class="prop-value">text-align</span> property to <span class="prop-value">center</span>.
+                <pre class="code">
+.nav-bar ul {
+    text-align: center;
+}                    
+                </pre>
+                </p>
+                <p class="body-text">
+                    To create the homepage's content, I used the display's <span class="prop-value">table</span> property value. 
+                    I used it to mimic a 2x1 table where the image is in the first cell and the title is in the second cell.
+                    In HTML, I start off by placing both the image and title in separate &#60;div&#62; tags to act as containers for the content. 
+                    Each of these containers will act as a table cell.
+                    Both of these entities are encapsulated by another &#60;div&#62; tag to act as the actual table.
+                    <pre class="code">
+&#60;div class="main-container"&#62;
+    &#60;div id="main-cont-img"&#62;&#60;img src="images/laptop.png" alt="laptop"&#62;&#60;&#47;div&#62;
+    &#60;div id="main-cont-title"&#62;WEB DEV BLOG
+        &#60;p id="main-cont-body"&#62;Vivian Dang | Computer Science&#62;&#60;&#47;p&#62;
+    &#60;&#47;div&#62;
+&#60;&#47;div&#62;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    In CSS, I set the div of the main-container class to have the <span class="prop-value">display</span> property value of <span class="prop-value">table</span>.
+                    This allows the outer container display its content as a table. I also set the <span class="prop-value">background-color</span> to cadetblue and the <span class="prop-value">table</span> to 100%. 
+                    As shown in the "Homepage of the Website" image, this main-container spans the entire width of the viewport as the laptop image and title contained inside of it. 
+                    I also set the top and bottom margin to 20px while the left and right margins are set to 0px. This allows for some spacing between the navigation bar and footer.
+                    <pre class="code">
+.main-container {
+    background-color: cadetblue;
+    width: 100%;
+    margin: 20px 0px;
+    display: table;
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    I also targeted the &#60;div&#60; tags that are descendents of the main-container class and set its <span class="prop-value">display</span> property to be <span class="prop-value">table-cell</span>.
+                    In this case, the two &#60;div&#60; descendents of the main-container class are the containers of the laptop image and title. 
+                    This property will allow the two entities to act as cells in a table, creating the 2x1 table display. Additionally, I set the
+                    <span class="prop-value">vertical-align</span> property to be <span class="prop-value">middle</span>, which vertically centers the content.
+                    <pre class="code">
+.main-container > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    For the laptop image, in CSS, I set it's <span class="prop-value">width</span> to be 50%, which allows it to take up 50% of its parent size. 
+                    In this case, its parent is the &#60;div&#60; of the main-container class, which takes up 100%. This specifies that the cells should be even as the image only fills 50% of the entire table.
+                    I also set it's <span class="prop-value">text-align</span> property to be <span class="prop-value">center</span>, which horizontally centers the image.
+                <pre class="code">
+#main-cont-img {
+    width: 50%;
+    text-align: center;
+}
+                </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, for the title content of the homepage, in CSS, I set the different fonts and spacing for "WEB DEV BLOG" and "Vivian Dang | Computer Science." 
+                </p>
+                <pre class="code">
+#main-cont-body {
+    font-size: 18px;
+    color: lightgray;
+    margin: 10px 0px;
+}
+                    
+#main-cont-title {
+    padding: 40px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 300;
+    font-size: 4em;
+}
+                </pre>
+                <p class="body-text">
+                    From applying these properties, I've learned about the importance of containers when it comes to formatting the display of elements. 
+                    The concept of inheritance is also important since initially, I couldn't figure out the sizing of the laptop image. 
+                    I knew that I wanted it to be exactly half of the screen but was just guessing the number of pixels to make it until I realized that it's dependent on it's parent &#60;div&#62; tag.
+                    Additionally, I was surprised that I can use the <span class="prop-value">text-align</span> property to even center images. 
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    References: <br>
+                    CSS Horizontal Navigation Bar. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/css/css_navbar_horizontal.asp">https://www.w3schools.com/css/css_navbar_horizontal.asp</a><br>
+                    CSS display Property. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/cssref/pr_class_display.asp">https://www.w3schools.com/cssref/pr_class_display.asp</a>
+                </p>
+            </div>
         </main>
         <footer>
             <ul class="footer">
