@@ -3,6 +3,11 @@
     font-weight: 300;
 }
 
+.body-font, #main-cont-body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+
 h1 {
     font-size: 8vh;
     margin: 17px 0px;
@@ -19,7 +24,7 @@ a:visited {
 }
 
 a:hover {
-    color: lightgray;
+    color: cadetblue;
 }
 
 ul {
@@ -27,6 +32,10 @@ ul {
     font-family: 'Playfair Display', serif;
     font-weight: 300;
     padding: 0;
+}
+
+.nav-bar {
+    border-bottom: solid lightgray 2px;
 }
 
 .nav-bar ul {
@@ -53,5 +62,49 @@ footer {
 .footer {
     margin: 0;
     font-size: 12px;
+}
+
+h2 {
+    color: cadetblue;
+    font-size: 4vh;
+}
+
+.main-container {
+    background-color: cadetblue;
+    width: 100%;
+    margin: 20px 0px 20px 0px;
+    display: table;
+}
+
+.main-container > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#main-cont-img {
+    width: 50%;
+    text-align: center;
+}
+
+#main-cont-body {
+    font-size: 18px;
+    color: lightgray;
+    margin: 10px 0px;
+}
+
+#main-cont-title {
+    padding: 40px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 300;
+    font-size: 4em;
+}
+
+.weekly-list {
+    list-style-type: circle;
+    padding: 0px 0px 0px 20px;
+}
+
+.weekly-content {
+    height: 60vh;
 }
 
