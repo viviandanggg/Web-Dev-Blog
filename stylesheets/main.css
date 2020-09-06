@@ -1,0 +1,57 @@
+.heading-font {
+    font-family: 'Playfair Display', serif;
+    font-weight: 300;
+}
+
+h1 {
+    font-size: 8vh;
+    margin: 17px 0px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited {
+    color: inherit;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+ul {
+    list-style-type: none;
+    font-family: 'Playfair Display', serif;
+    font-weight: 300;
+    padding: 0;
+}
+
+.nav-bar ul {
+    text-align: center;
+}
+
+.nav-content {
+    display: inline;
+    padding: 10px;
+}
+
+.content {
+    display: block;
+}
+
+footer {
+    background-color: lightgray;
+    font-size: 2vh;
+    color: white;
+    padding: 5px 5px;
+    margin: 5px 0px;
+}
+
+.footer {
+    margin: 0;
+    font-size: 12px;
+}
+
