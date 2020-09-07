@@ -30,7 +30,7 @@
             <h2 class="heading-font">WEEK 1 BLOG</h2>
             <h3 class="heading-font">Display Properties | Sept 11, 2020</h3>
             <figure>
-                <img id="homepage-img" src="images/homepage.png" alt="homepage">
+                <img id="homepage-img" src="images/homepage_sept.png" alt="homepage">
                 <figcaption>Homepage of the Website</figcaption>
             </figure>
             <div class="body-container">
@@ -122,7 +122,7 @@ ul {
                     I also targeted the &#60;div&#60; tags that are descendents of the main-container class and set its <span class="prop-value">display</span> property to be <span class="prop-value">table-cell</span>.
                     In this case, the two &#60;div&#60; descendents of the main-container class are the containers of the laptop image and title. 
                     This property will allow the two entities to act as cells in a table, creating the 2x1 table display. Additionally, I set the
-                    <span class="prop-value">vertical-align</span> property to be <span class="prop-value">middle</span>, which vertically centers the content.
+                    <span class="prop-value">vertical-align</span> property to be <span class="prop-value">middle</span>, which vertically centers the content ("CSS Layout - Horizontal & Vertical Align", n.d.).
                     <pre class="code">
 .main-container > div {
     display: table-cell;
@@ -133,11 +133,15 @@ ul {
                 <p class="body-text">
                     For the laptop image, in CSS, I set it's <span class="prop-value">width</span> to be 50%, which allows it to take up 50% of its parent size. 
                     In this case, its parent is the &#60;div&#60; of the main-container class, which takes up 100%. This specifies that the cells should be even as the image only fills 50% of the entire table.
-                    I also set it's <span class="prop-value">text-align</span> property to be <span class="prop-value">center</span>, which horizontally centers the image.
+                    I also set it's <span class="prop-value">margin-left</span> and <span class="prop-value">margin-right</span> properties to be <span class="prop-value">auto</span>
+                    and its <span class="prop-value">display</span> property to be <span class="prop-value">block</span>, which horizontally centers the image ("CSS Layout - Horizontal & Vertical Align", n.d.). 
+                    Images are <span class="prop-value">inline</span> elements by default, so setting this property allows it to act as a <span class="prop-value">block</span> element.
                 <pre class="code">
 #main-cont-img {
     width: 50%;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
                 </pre>
                 </p>
@@ -160,16 +164,16 @@ ul {
                 </pre>
                 <p class="body-text">
                     From applying these properties, I've learned about the importance of containers when it comes to formatting the display of elements. 
-                    The concept of inheritance is also important since initially, I couldn't figure out the sizing of the laptop image. 
-                    I knew that I wanted it to be exactly half of the screen but was just guessing the number of pixels to make it until I realized that it's dependent on it's parent &#60;div&#62; tag.
-                    Additionally, I was surprised that I can use the <span class="prop-value">text-align</span> property to even center images. 
+                    Setting up this homepage was difficult initially since I would just try different things to see what happens. 
+                    The process did help me learn about CSS selectors and the difference between the types of elements (block vs. inline).
                 </p>
             </div>
             <div class="body-container">
                 <p class="body-text">
                     References: <br>
-                    CSS Horizontal Navigation Bar. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/css/css_navbar_horizontal.asp">https://www.w3schools.com/css/css_navbar_horizontal.asp</a><br>
-                    CSS display Property. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/cssref/pr_class_display.asp">https://www.w3schools.com/cssref/pr_class_display.asp</a>
+                    CSS display Property. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/cssref/pr_class_display.asp">https://www.w3schools.com/cssref/pr_class_display.asp</a><br>
+                    CSS Layout - Horizontal &amp; Vertical Align. (n.d.). Retrieved September 07, 2020, from <a href="https://www.w3schools.com/css/css_align.asp">https://www.w3schools.com/css/css_align.asp</a><br>
+                    CSS Horizontal Navigation Bar. (n.d.). Retrieved September 06, 2020, from <a href="https://www.w3schools.com/css/css_navbar_horizontal.asp">https://www.w3schools.com/css/css_navbar_horizontal.asp</a>
                 </p>
             </div>
         </main>
