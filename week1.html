@@ -19,14 +19,16 @@
             </h1>
         </header>
         <main>
-            <div class="nav-bar">
-                <ul>
-                    <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
-                    <li class="nav-content"><a href="week1.html" title="New Post">NEW POST</a></li>
-                    <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
-                    <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
-                </ul>
-            </div>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week1.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
             <h2 class="heading-font">WEEK 1 BLOG</h2>
             <h3 class="heading-font">Display Properties | Sept 11, 2020</h3>
             <figure>
@@ -123,25 +125,27 @@ ul {
                     In this case, the two &#60;div&#62; descendents of the main-container class are the containers of the laptop image and title. 
                     This property will allow the two entities to act as cells in a table, creating the 2x1 table display. Additionally, I set the
                     <span class="prop-value">vertical-align</span> property to be <span class="prop-value">middle</span>, which vertically centers the content ("CSS Layout - Horizontal & Vertical Align", n.d.).
+                    I also set its <span class="prop-value">width</span> to be 50%, which allows it to take up 50% of its parent size. 
+                    In this case, its parent is the &#60;div&#62; of the main-container class, which takes up 100%. This specifies that the cells should be even as the image only fills 50% of the entire table.
                     <pre class="code">
 .main-container > div {
     display: table-cell;
     vertical-align: middle;
+    width: 50%;
 }
                     </pre>
                 </p>
                 <p class="body-text">
-                    For the laptop image, in CSS, I set its <span class="prop-value">width</span> to be 50%, which allows it to take up 50% of its parent size. 
-                    In this case, its parent is the &#60;div&#60; of the main-container class, which takes up 100%. This specifies that the cells should be even as the image only fills 50% of the entire table.
-                    I also set it's <span class="prop-value">margin-left</span> and <span class="prop-value">margin-right</span> properties to be <span class="prop-value">auto</span>
+                    For the laptop image, in CSS, I set it's <span class="prop-value">margin-left</span> and <span class="prop-value">margin-right</span> properties to be <span class="prop-value">auto</span>
                     and its <span class="prop-value">display</span> property to be <span class="prop-value">block</span>, which horizontally centers the image ("CSS Layout - Horizontal & Vertical Align", n.d.). 
-                    Images are <span class="prop-value">inline</span> elements by default, so setting this property allows it to act as a <span class="prop-value">block</span> element.
+                    Images are <span class="prop-value">inline</span> elements by default, so setting this property allows it to act as a <span class="prop-value">block</span> element. 
+                    I also set its <span class="prop-value">height</span> property to be 100% so that it fills its entire container, the  &#60;div&#62; of the main-container-img id.
                 <pre class="code">
-#main-cont-img {
-    width: 50%;
+#main-cont-img > img {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    height: 100%;
 }
                 </pre>
                 </p>
@@ -167,7 +171,7 @@ ul {
                     Setting up this homepage was difficult initially since I tried different things to just see what happens. 
                     The process did help me learn about CSS selectors and the difference between the types of elements (block vs. inline).
                     After learning about the flexbox feature, I've realized that some of the methods that I used aren't the most ideal; however, the methods suggested by the articles I read are informative and just show me another way to do similar things. 
-                    There are still some weird sizing issues with this homepage, but it is just an application of what I've read.
+                    This blog's homepage and navigation links are just an application of the articles I read.
                     Overall, I believe that this is still a process as I try out more things with HTML and CSS.
                 </p>
             </div>

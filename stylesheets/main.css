@@ -78,13 +78,14 @@ h2 {
 .main-container > div {
     display: table-cell;
     vertical-align: middle;
+    width: 50%;
 }
 
-#main-cont-img {
-    width: 50%;
+#main-cont-img > img {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    height: 100%;
 }
 
 #main-cont-body {
