@@ -9,7 +9,7 @@
        <link rel="stylesheet" href="stylesheets/main.css">
        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
-       <title>WEEK 1 BLOG</title> 
+       <title>WEEK 2 BLOG</title> 
     </head>
 
     <body>
@@ -30,15 +30,153 @@
                 </div>
             </nav>
             <h2 class="heading-font">WEEK 2 BLOG</h2>
-            <h3 class="heading-font"> TBD | Sept 18, 2020</h3>
+            <h3 class="heading-font"> Manual and Animated Slideshow | Sept 18, 2020</h3>
 
             <div class="body-container">
- 
+                <figure>
+                    <img id="slideshow-img" src="images/slideshow.png" alt="slideshow image">
+                    <figcaption>Example of a manual slideshow from <a href="https://www.w3schools.com/w3css/w3css_slideshow.asp">W3Schools.com</a></figcaption>
+                </figure>
+                <p class="body-text">
+                    This week, I explored manual and animated slideshows, which can be created using HTML, CSS, and JavaScript.
+                    Even though I've never worked with JavaScript before, I've realized that it is very similar to other programming languages such as Java and Python when
+                    it comes to defining and implementing its functions or methods. For both manual and animated slideshows, each slide is treated as an element in an array. 
+                    By using a standard for-loop, the elements in the array can be tranverse through to create a slideshow effect. 
+                </p>
+                <p class="body-text">
+                    To create a manual slideshow of images, in HTML, every image is declared with the &#60;img&#62; tag and then encapsulated by a &#60;div&#62; container.
+                    There are variations on the types of buttons that can be used, but every button must be declared using a &#60;button&#62; tag 
+                    with the attribute <span class="prop-value">onclick</span> set to some function. The function may be given any name, but according to the article, the most efficient way to 
+                    create a slideshow is to pass an integer as its argument. This is because, as stated, the slides in the slideshow are treated as elements in an array, so they can be access by their index.
+                    -1 can be used to indicate going left while 1 can be used to indicate going right in the slideshow. The function can also take in the index of the element (slide) in the array ("W3.CSS Slideshow", n.d.).
+                    As shown in other examples I've read about, an &#60;a&#62; tag can also be used instead of a &#60;button&#62;, but still requires the <span class="prop-value">onclick</span> attribute to be set to some function ("How TO - Slideshow", n.d.) .
+                </p>
+                <p class="body-text">
+                    For example, to create a manual slideshow as exemplified in the photo above, HTML code will be as followed:
+                    <pre class="code">
+&#60;div class="container"&#62;
+    &#60;img class="slides" src="example1.jpg"&#62;
+    &#60;img class="slides" src="example2.jpg"&#62;
+    &#60;img class="slides" src="example3.jpg"&#62;
+    &#60;img class="slides" src="example4.jpg"&#62;                        
+    &#60;button class="left-button" onclick="move(-1)"&#62;&amp;#10094;&#60;&#47;button&#62;
+    &#60;button class="right-button" onclick="move(1)"&#62;&amp;#10095;&#60;&#47;button&#62; 
+&#60;&#47;div&#62;
+Code from ("W3.CSS Slideshow", n.d.)
+                    </pre>
+                </p>
+                <p class="body-text">
+                    As shown in the photo above, since the buttons are located on the image, they are encapsulated by the same &#60;div&#62; tag as the images. 
+                    The hex code of #10094 and #10095 are treated as entities to create the &#10094; and &#10095; icons on the buttons.
+                    As stated, there are variations on where the buttons can be located and what they look like. 
+                    The buttons may also be encapsulated by their own &#60;div&#62; container so that they exist outside of the image. 
+                    The manual slideshow can also be accompanied with a row of buttons with numbers on it to show the user which slide they are on. 
+                    Many of these variations can be accomplished in CSS using the flex model or display properties. 
+                    The functions can also be implemented so that users can only access the slides in order or by clicking on whichever slide they please depending on what buttons are available.
+                    To access the slides in order with a left and right button, JavaScript code may be implemented as follow:
+                    <pre class="code">
+&#60;script&#62;
+    var index = 1;
+    show(index);
+                            
+    function move(x) {
+        show(index += x); // Indicate if user pressed the left or right button
+    }
+                            
+    function show(x) {
+        var i;
+        var slideArr = document.getElementsByClassName("slides");
+        if (n &#62; slideArr.length) {
+            index = 1; // Go back to the first image
+        }
+        if (n &#60; 1) {
+            index = x.length; // Go to the last image
+        }
+        for (i = 0; i &#60; slideArr.length; i++) {
+            slideArr[i].style.display = "none";  // Make all other slides not visible
+        }
+        slideArr[index-1].style.display = "block";  // Make the selected image visible
+    }
+&#60;&#47;script&#62;
+Code from ("W3.CSS Slideshow", n.d.)
+                    </pre>
+                </p>
+                <p class="body-text">
+                    As described by my comments, two functions are used to create a slideshow effect. 
+                    The purpose of the two functions is to choose the appropriate index of the slide in the array.
+                    Once the index is selected, all of the other slides are made invisible except the selected slide. 
+                </p>
+                <p class="body-text">
+                    Creating an animated slideshow requires similar code in HTML, except there won't be any buttons since the images will change automatically.
+                    This is a basic example, but captions and text may also be added in HTML code for both animated and manual slideshows.
+                    <pre class="code">
+&#60;div class="container"&#62;
+    &#60;img class="slides fade" src="example1.jpg"&#62;
+    &#60;img class="slides fade" src="example2.jpg"&#62;
+    &#60;img class="slides fade" src="example3.jpg"&#62;
+    &#60;img class="slides fade" src="example4.jpg"&#62;                        
+&#60;&#47;div&#62;    
+                    </pre>
+                </p>
+                <p class="body-text">
+                    To create the animated slideshow, in CSS, the <span class="prop-value">@keyframe</span> and <span class="prop-value">@-webkit-keyframe</span> animation rules must be set. 
+                    The <span class="prop-value">-webkit-</span> prefix allows chrome and safari browsers to render the animation ("CSS @keyframes Rule", n.d.). To create a fade animation, CSS code is as follow:
+                    <pre class="code">
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+                          
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+                          
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+Code from ("How TO - Slideshow", n.d.)
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Javascript code for animated slideshows is similar to manual slideshows. Code is as follow:
+                    <pre class="code">
+&#60;script&#62;
+    var index = 1;
+    show(index);
+
+    function show(x) {
+        var i;
+        var slideArr = document.getElementsByClassName("slides");
+        for (i = 0; i &#60; slideArr.length; i++) {
+                slideArr[i].style.display = "none";  // Make all other slides not visible
+        }
+        index++;
+        if (index > slideArr.length) {
+            slideIndex = 1; // Go back to the first image
+        }  
+        slideArr[index-1].style.display = "block";  // Make the selected image visible
+        }
+        setTimeout(show, 2000); // Time intervals of 2 seconds
+&#60;&#47;script&#62; 
+Code from ("How TO - Slideshow", n.d.)     
+                    </pre>
+                </p>
+                <p class="body-text">
+                    As indicated by my comments, the main difference between manual and animated slideshow Javascript code is the <span class="prop-value">setTimeout()</span> method.
+                    This method controls the animation by setting the changing the image every 2 seconds ("How TO - Slideshow", n.d.). 
+                </p>
             </div>
             <div class="body-container">
                 <p class="body-text">
                     <ul>
                         <li>References:</li>
+                        <li>CSS @keyframes Rule. (n.d.). Retrieved September 10, 2020, from <a href="https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp">https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp</a></li>
+                        <li>How TO - Slideshow. (n.d.). Retrieved September 10, 2020, from <a href="https://www.w3schools.com/howto/howto_js_slideshow.asp">https://www.w3schools.com/howto/howto_js_slideshow.asp</a></li>
+                        <li>W3.CSS Slideshow. (n.d.). Retrieved September 10, 2020, from <a href="https://www.w3schools.com/w3css/w3css_slideshow.asp">https://www.w3schools.com/w3css/w3css_slideshow.asp</a></li>
                     </ul>
                 </p>
             </div>

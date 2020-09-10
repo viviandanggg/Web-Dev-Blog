@@ -128,7 +128,7 @@ figcaption {
 }
 
 .body-text {
-    margin: 0px 60px;
+    margin: 20px 60px;
 }
 
 .prop-value-list {
@@ -147,6 +147,13 @@ figcaption {
 .body-container {
     height: 50%;
     margin: 0px 0px 50px 0px;
+}
+
+#slideshow-img {
+    text-align: center;
+    margin: 0px 20px;
+    width: 97%;
+    border: solid lightgray;
 }
 
 
