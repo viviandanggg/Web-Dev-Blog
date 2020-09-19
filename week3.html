@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 3 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week2.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 3 BLOG</h2>
+            <h3 class="heading-font"> Contact Form | Sept 25, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    Creating a contact form that sends directly to a user's email usually involves PHP. 
+                    This week, I learned about how to create a contact form using just HTML, CSS, JavaScript.
+                    This methods uses the <span class="prop-value">mailto:</span> URI scheme. 
+                    This is accomplished by using &#60;a&#62; tags with the <span class="prop-value">href</span> attribute being set to "mailto:____". 
+                    This will be written in HTML as followed:
+                    <pre class="code">
+&#60;a href="mailto:name@example.com"&#62;MESSAGE&#60;&#47;a&#62;
+&#60;a href="mailto:name@example.com?subject=Test Subject"&#62;SUBJECT&#60;&#47;a&#62;
+&#60;a href="mailto:name@example.com?body=Message Body"&#62;MESSAGE BODY&#60;&#47;a&#62;
+&#60;a href="mailto:name@example.com?cc=cc@example.com"&#62;CC&#60;&#47;a&#62;
+&#60;a href="mailto:name@example.com?bcc=bcc@example.com"&#62;BCC&#60;&#47;a&#62;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The actual form can be written in HTML by using the &#60;form&#62; tag with the <span class="prop-value">name</span> attribute set to "contact" and the <span class="prop-value">method</span> attribute set to "post". 
+                    However many fields can be added using &#60;label&#62;, &#60;input&#62;, and &#60;textarea&#62; tags. 
+                <pre class="code">
+&#60;form name="contact" method="post"&#62;
+    &#60;label&#62;Name&#60;&#47;label&#62;
+    &#60;input type="text" name="name"&#47;&#62;
+    &#60;label&#62;Subject&#60;&#47;label&#62;
+    &#60;input type="text" name="subject"&#47;&#62;
+    &#60;label&#62;Email&#60;&#47;label&#62;
+    &#60;input type="text" name="email"&#47;&#62;
+    &#60;label&#62;Message&#60;&#47;label&#62;
+    &#60;textarea name="message"&#47;&#62;&#60;&#47;textarea&#62;
+    &#60;input type="submit" name="send" value="Send Message"&#47;&#62;
+&#60;&#47;form&#62;
+                </pre>
+                </p>
+                <p class="body-text">
+                    CSS can also be used to configure the sizing, margin, and padding of the contact form.
+                    JavaScript is more significant in this implementation as it was be used to parse form. 
+                    Based on the article I read, JavaScript code can be implemented as followed:
+                    <pre class="code">
+var form = document.forms["contact"];
+form.addEventListener("submit", contact_submit, false);                        
+                    </pre>
+                </p>
+                <p class="body-text">
+                    This segment of code targets the contact form and calls an event listener on it. The contact_submit function will be implemented as such:
+                    <pre class="code">
+function contact_submit(e) {
+    e.preventDefault(); // Prevents form from submitting
+
+    // Declares and initalizes variables
+    var target = e.target || e.srcElement;
+    var to = "someone@example.com";
+    var uri = "mailto:" + to;
+    var body = "";
+
+    // Set form values to variables
+    var name = target.elements["name"].value;
+    var subject = target.elements["subject"].value;
+    var email = target.elements["email"].value;
+    var message = target.elements["message"].value;
+
+    // Builds the body message
+    body += message + "\r\n\r\n";
+    body += "Name: " + name + "\r\n";
+    body += "Email: " + email + "\r\n";
+
+    // Builds mailto URI
+    uri += "?subject" + encodeURIComponent(subject);
+    uri += "&body=" + encodeURIComponent(body);
+
+    // Opens Mailto in a new Window or tab
+    window.open(uri, "_blank";)
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    As described by the comments, the function builds the message and encodes the mailto URI. 
+                    It listens for the event of the user pressing the send button. 
+                    According to the author of the article, using PHP is a more ideal way to send an email from a website. 
+                    In order for this way to work, the user needs a mail client setup. 
+                    If the user uses this method, it is also better if they use JavaScript or some other encoding to encode their email address and then decode it. 
+                    This is important since it prevent bots from spamming the user's email ("Website Contact Form without PHP.", 2014). 
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>Website Contact Form without PHP. (2014, June 29). Retrieved from <a href="https://geekthis.net/post/website-contact-form-without-php/">https://geekthis.net/post/website-contact-form-without-php/</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
