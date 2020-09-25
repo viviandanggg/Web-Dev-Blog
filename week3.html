@@ -74,7 +74,7 @@ form.addEventListener("submit", contact_submit, false);
                     </pre>
                 </p>
                 <p class="body-text">
-                    This segment of code targets the contact form and calls an event listener on it. The contact_submit function will be implemented as such:
+                    This segment of code targets the contact form and calls an event listener on it. When the user presses "submit," the contact_submit funciton is called. The contact_submit function will be implemented as such:
                     <pre class="code">
 function contact_submit(e) {
     e.preventDefault(); // Prevents form from submitting
@@ -108,10 +108,14 @@ function contact_submit(e) {
                 <p class="body-text">
                     As described by the comments, the function builds the message and encodes the mailto URI. 
                     It listens for the event of the user pressing the send button. 
+                    This example shows concatenation, which is similar to how Java concatenates Strings.
+                    It starts off by grabbing the values from the label and textarea.
                     According to the author of the article, using PHP is a more ideal way to send an email from a website. 
                     In order for this way to work, the user needs a mail client setup. 
                     If the user uses this method, it is also better if they use JavaScript or some other encoding to encode their email address and then decode it. 
                     This is important since it prevent bots from spamming the user's email ("Website Contact Form without PHP.", 2014). 
+                    Even though using PHP is more ideal, since we are mainly learning JavaScript, CSS, and HTML in this course, I thought that this was an interesting alternative. 
+                    If anything, this example uses the &#60;contact&#62;, &#60;input&#62;, &#60;label&#62;, and &#60;textarea&#62; tags which are useful for obtaining some sort of user input.
                 </p>
             </div>
             <div class="body-container">
