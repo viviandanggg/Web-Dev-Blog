@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 4 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week3.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 4 BLOG</h2>
+            <h3 class="heading-font"> Modal Images | Oct 2, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    This week, I read a step-by-step on how to create responsive modal images using HTML, CSS, and JavaScript. 
+                    Modals are dialog boxes or windows that pop up once the user enacts some event. 
+                    For this example, once the user clicks on the image, a dialog box with an enlarged version of the image will pop up.
+                    When the user hovers his or her mouse over the image, the image will look faded to indicate that it is clickable. 
+                    The type of cursor will also change to a be a pointer once the user hovers over the image. 
+                    JavaScript will be used trigger the modal and show an enlarged version of the image inside of the modal. 
+                    It will also be used to close the modal once the user clicks on the "x" close button. The modal will also display a short caption about the image underneath the image.
+                    I decided to learn how to do this since I am creating an art portfolio website for my client as part of a project for this course. 
+                    I believe the website can be more interactive and useful if visitors of the website can learn more about each piece of my client's art. 
+                </p>
+                <p class="body-text">
+                    In HTML, the &#60;img&#62; will be used to place an image on the page. 
+                    The modal will be crated using the &#60;div&#62; tag, which will encapsulate a close button, the same image, and a caption of the image. 
+                    The source and alt of the image did not needed to be repeated. When placing the image inside of the modal, the image was simply referred to by its id. 
+                    The original image and the modal will essentially exist as separate entities. 
+                    The code in HTML is as followed:
+                    <pre class="code">
+&#60;! -- The Original Image -- &#62;                     
+&#60;img id="myImg" src="#" alt="__"&#62;
+
+&#60;! -- The Modal -- &#62;   
+&#60;div id="myModal" class="modal"&#62;
+
+    &#60;span class="close"&#62;X&#60;&#47;span&#62; 
+
+    &#60;! -- Image is placed inside the modal by id -- &#62;                
+    &#60;img class="modal-content" id="img01"&#62;
+
+    &#60;div id="caption"&#62;&#60;&#47;div&#62;
+&#60;&#47;div&#62;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    CSS will be used to make the modal look like a modal. Essentially, it will look like a dialog box by filling up the entire viewport. 
+                    CSS transform, transition, animation properties will be used to make it look more animated, but we are simply changing what gets displayed on screen. 
+                    The modal's display will initially be set to none. The original image will be the only thing on screen. The code for CSS is as followed with more details in the comments:
+                    <pre class="code">
+#myImg {
+    border-radius: 5px;
+    cursor: pointer; /* Changes the cursor to be a pointer when hovered over the image */
+    transition: 0.3s; /* Determines the timing of the fade transition */
+}
+                        
+#myImg:hover {opacity: 0.7;} /* Specifies the fade transition */
+                        
+/* The Modal */
+.modal {
+    display: none; /* Is hidden initially */
+    position: fixed; /* Fixes the modal to the browser's viewport */
+    z-index: 1; /* Layers the modal on top of the other elements in the browser */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; /* Fills entire width of the browser */
+    height: 100%; /* Fills entire height of the browser */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.9); /* Background of the modal will be a transparent black */
+}
+                        
+/* Image inside of the Modal */
+.modal-content {
+    margin: auto; /* Centers the image */
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+                        
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%; /* Makes the caption the same width as the image */
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+                        
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+/* @keyframes refers to the animation specified above */
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+                        
+/* The Close Button */
+.close {
+    position: absolute; /* Positions the close button in the top left corner */
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+                        
+.close:hover, .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer; /* Changes the cursor to be a pointer when the user hovers over it */
+}
+                        
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The last thing to do is to add JavaScript. The example that I read about uses var to declare its variables, but as we learned in class, const or let is better, so in this example, I will use const. 
+                    JavaScript will basically detect if the image or close button has been clicked on. If they have been clicked on, then a function will specify if the modal's display should be hidden or not. 
+                    The code is as followed:
+                    <pre class="code">
+// Get the modal
+const modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+const img = document.getElementById("myImg");
+const modalImg = document.getElementById("img01");
+const captionText = document.getElementById("caption");
+
+// Sets the src and alt here instead of explicitly declaring it in HTML
+img.onclick = function(){
+  modal.style.display = "block"; // Show the modal
+  modalImg.src = this.src; // Sets the modal's image's src 
+  captionText.innerHTML = this.alt; // Sets the modal's image's alt
+}
+
+// Get the close button
+var span = document.getElementsByClassName("close")[0];
+
+// Closing the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}                        
+                    </pre>
+                </p>
+                <p class="body-text">
+                    I was personally really surprise how "simple" it was to create a modal. I thought it involved more animations or JavaScript, but it involved a lot of the things we've already learned in class about positioning and display ("How TO- Modal Images", n.d.). 
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>How TO - Modal Images. (n.d.). Retrieved September 27, 2020, from <a href="https://www.w3schools.com/howto/howto_css_modal_images.asp">https://www.w3schools.com/howto/howto_css_modal_images.asp</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
