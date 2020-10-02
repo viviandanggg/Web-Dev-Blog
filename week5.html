@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 5 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week4.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 5 BLOG</h2>
+            <h3 class="heading-font"> Password Validation | Oct 9, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    This week, I researched how to create a password validation form by using HTML, CSS, and JavaScript. 
+                    These types of forms are typically seen when users create new accounts on platforms. 
+                    Password validation can be used to confirm a user's password by having them enter their password twice and comparing the two entries.
+                    It can also be used to ensure that users stick to certain specifications when deciding their password.
+                    For example, for security reasons, certain platforms can force users have have at least one digit or capitalized letter in their password. 
+                    I will be focusing password validation it comes to having specifications. 
+                    Based on the example provided by the article that I read, this form will force users to have at least one capitalized letter, one lowercase letter, one number, and a minimum of 8 characters total. 
+                    This example will have a form and message area that states the specifications.
+                    Users will enter their password into the input fields of the form and those specifications will be checked off if they are met. 
+                    For example, as soon as the user types in a digit, the "one number" specification will be checked off in the message area. 
+                </p>
+                <p class="body-text">
+                    HTML will be used to create the structure of the form. &#60;form&#62;, &#60;input&#62; and &#60;label&#62; tags will be used to structure the actual form. 
+                    A separate &#60;div&#62; tag will be used to display the specifications about what is expected in a password. 
+                    This HTML example uses the action attribute in its &#60;form&#62; tag, which indicates where the form will be sent to. In this case, the example is sending it to some PHP file. 
+                    This example also uses a regular expression as a value in its &#60;input&#62; password tag. This regular expression specifies that constraints of a valid password. 
+                    HTML code is as followed:
+                    <pre class="code">
+&#60;div class="container"&#62;
+    &#60;form action="/action_page.php"&#62;
+    &#60;label for="usrname"&#62;Username&#60;/label&#62;
+    &#60;input type="text" id="usrname" name="usrname" required&#62;
+
+    &#60;label for="psw"&#62;Password&#60;/label&#62;
+    &#60;input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required&#62;
+
+    &#60;input type="submit" value="Submit"&#62;
+    &#60;/form&#62;
+&#60;/div&#62;
+
+&#60;div id="message"&#62;
+    &#60;h3&#62;Password must contain the following:&#60;/h3&#62;
+    &#60;p id="letter" class="invalid"&#62;A&#60;b&#62;lowercase&#60;/b&#62;letter&#60;/p&#62;
+    &#60;p id="capital" class="invalid"&#62;A&#60;b&#62;capital (uppercase)&#60;/b&#62;letter&#60;/p&#62;
+    &#60;p id="number" class="invalid"&#62;A&#60;b&#62;number&#60;/b&#62;&#60;/p&#62;
+    &#60;p id="length" class="invalid"&#62;Minimum &#60;b&#62;8 characters&#60;/b&#62;&#60;/p&#62;
+&#60;/div>
+                    </pre>
+                </p>
+                <p class="body-text">
+                    CSS will be used to format the form and message area with the specifications. The message area will only show once the user click onto the password field. 
+                    The specifications will be assigned the class of either valid or invalid respectively. As shown in HTML, all of the specifications are initially assigned the invalid class. 
+                    When the user has enter a minimum of 8 characters, then the &#60;p&#62; tag with the length id will no longer be assigned the invalid class, and will have the valid class. 
+                    CSS code is as followed:
+                    <pre class="code">
+/* Style all input fields */
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+/* before selector will insert the check mark before the content */
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "&#10004;";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+/* before selector will insert the X before the content */
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "&#10006;";
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    JavaScript will be used to reassign the classes appropriately. It will be used to make the specification message area appear when the user clicks on the password field.
+                    It will also be checking for those specificatons. Once the specifications are met, then the valid class will be assigned. JavaScript code is as followed: 
+                    <pre class="code">
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the message box
+myInput.onfocus = function() {
+  document.getElementById("message").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the message box
+myInput.onblur = function() {
+  document.getElementById("message").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+}
+
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+("How TO - Passowrd Validation", n.d.)
+                    </pre>
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>How TO - Password Validation. (n.d.). Retrieved October 02, 2020, from <a href="https://www.w3schools.com/howto/howto_js_password_validation.asp">https://www.w3schools.com/howto/howto_js_password_validation.asp</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
