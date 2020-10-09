@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 6 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week5.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 6 BLOG</h2>
+            <h3 class="heading-font"> Image Magnify Glass | Oct 16, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    This week, I discovered how to implement an image magnify glass using HTML, CSS, and JavaScript.
+                    This is when the user hovers over the image and a tiny circle shows up with a zoomed in section of the image. 
+                    As the user hovers over different sections of the image, the appropriate zoomed in section will show up in the tiny circle. 
+                    This implementation relies heavily on JavaScript, which was why I chose it since we are mainly covering JavaScript in class currently. 
+                    Three different functions will be implemented to detect the location of where the user's mouse is hovering over, to show the magnified version of the image, and to allow the user to move the magnify glass around the image. 
+                </p>
+                <p class="body-text">
+                    The code in HTML for this feature is fairly simple since it just invovles an image that is encapsulated by a &#60;div&#62; as shown.
+                    <pre class="code">
+&#60;div class="container"&#62;
+    &#60;img id="image" src="image.jpg"&#62;
+&#60;/div&#62;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    CSS will be used to create the actual magnify glass. This glass will be given a absolute positioning. Other CSS properties set for this magnify glass specifies the size and makes it into a circle. 
+                    The first selector used in this code is a * which means that all elements will be applied the box-sizing property of border-box. The CSS Code is as followed:
+                    <pre class="code">
+* {
+    box-sizing: border-box;
+}
+
+.container {
+  position: relative;
+}
+
+.magnify-glass{
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  width: 100px;
+  height: 100px;
+}                        
+                    </pre>
+                </p>
+                <p class="body-text">
+                    For the example that I used, three methods were implemented to show the magnify glass and show the magnified image.
+                    However, it's more of one main method that encapsulates two other methods. 
+                    Eventually, this example calls that main method in the &#60;script&#62; tag in the head. 
+                    The beginning of this main method initializes the variables and calls event listeners on them. 
+                    This main method also takes in a zoom parameter to determine how zoomed in the magnify glass should be. 
+                    It also sets the initial background properties of the magnify glass and creates it as a &#60;div&#62;. 
+                    The moveMagnifier() method accounts for where the user's cursor is on the page. It sets conditionals based on if the user's cursor is off the screen or not. 
+                    Based on where the user's cursor is, the magnify glass's background posiiton gets changed.  
+                    This moveMagnifier() method also calls the thrid method getCursorPos() which determines where the user's cursor is. 
+                    JavaScript code is as followed and more details about the code written in the comments:
+                    <pre class="code">
+function magnify(imgID, zoom) {
+  var img, glass, w, h, bw;
+  img = document.getElementById(imgID);
+
+  /* Creates the magnify glass as a div */
+  glass = document.createElement("DIV");
+  glass.setAttribute("class", "magnify-glass");
+
+  /* Inserts the magnify glass as a new node*/
+  img.parentElement.insertBefore(glass, img);
+
+  /* Initializes the background properties of the magnify glass */
+  glass.style.backgroundImage = "url('" + img.src + "')";
+  glass.style.backgroundRepeat = "no-repeat";
+  glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+  bw = 3;
+  w = glass.offsetWidth / 2;
+  h = glass.offsetHeight / 2;
+
+  /* Calls event listners on when the user hovers their mouse over the image by calling the moveMagnifier() method */
+  glass.addEventListener("mousemove", moveMagnifier);
+  img.addEventListener("mousemove", moveMagnifier);
+
+  /* Makes it compatible for touch screens */
+  glass.addEventListener("touchmove", moveMagnifier);
+  img.addEventListener("touchmove", moveMagnifier);
+
+  /* moveMagnifier() function */ 
+  function moveMagnifier(e) {
+    var pos, x, y;
+
+    /* Prevent other actions to occur when the user's mouse is hovering of the image */
+    e.preventDefault();
+
+    /* Calls the getCursorPos() method to get the cursor's position */
+    pos = getCursorPos(e);
+    x = pos.x;
+    y = pos.y;
+
+    /* Ensures that the user's mouse isn't out of bounds on the image */
+    if (x &#62; img.width - (w / zoom)) {x = img.width - (w / zoom);}
+    if (x &#60; w / zoom) {x = w / zoom;}
+    if (y &#62; img.height - (h / zoom)) {y = img.height - (h / zoom);}
+    if (y &#60; h / zoom) {y = h / zoom;}
+
+    /* Sets the magnify glass' position */
+    glass.style.left = (x - w) + "px";
+    glass.style.top = (y - h) + "px";
+
+    /* Shows the zoomed in version of the image based on the glass' position */
+    glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+  }
+
+  /* getCursorPos() method */
+  function getCursorPos(e) {
+    var a, x = 0, y = 0;
+    e = e || window.event;
+
+    /* Get the x and y positions of the image */
+    a = img.getBoundingClientRect();
+
+    /* Calculate the cursor's x and y coordinates, relative to the image */
+    x = e.pageX - a.left;
+    y = e.pageY - a.top;
+
+    /* Accounts for page scrolling */
+    x = x - window.pageXOffset;
+    y = y - window.pageYOffset;
+    return {x : x, y : y};
+  }
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, this main magnify() function is called in &#60;script&#62; tag of HTML as shown. The number 3 is the amount of zoom. 
+                    <pre class="code">
+&#60;script&#62;
+    magnify("image", 3);
+&#60;/script&#62;  
+("How TO - Image Magnifier Glass", n.d.)                     
+                    </pre>
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>How TO - Image Magnifier Glass. (n.d.). Retrieved October 09, 2020, from <a href="https://www.w3schools.com/howto/howto_js_image_magnifier_glass.asp">"https://www.w3schools.com/howto/howto_js_image_magnifier_glass.asp"</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
