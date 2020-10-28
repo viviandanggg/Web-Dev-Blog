@@ -23,21 +23,21 @@
                 <div class="nav-bar">
                     <ul>
                         <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
-                        <li class="nav-content"><a href="week5.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="week6.html" title="New Post">NEW POST</a></li>
                         <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
                         <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
                     </ul>
                 </div>
             </nav>
             <h2 class="heading-font">WEEK 6 BLOG</h2>
-            <h3 class="heading-font"> Image Magnify Glass | Oct 16, 2020</h3>
+            <h3 class="heading-font"> Image Magnify Glass | Oct 30, 2020</h3>
 
             <div class="body-container">
                 <p class="body-text">
                     This week, I discovered how to implement an image magnify glass using HTML, CSS, and JavaScript.
                     This is when the user hovers over the image and a tiny circle shows up with a zoomed in section of the image. 
                     As the user hovers over different sections of the image, the appropriate zoomed in section will show up in the tiny circle. 
-                    This implementation relies heavily on JavaScript, which was why I chose it since we are mainly covering JavaScript in class currently. 
+                    This implementation relies heavily on JavaScript.
                     Three different functions will be implemented to detect the location of where the user's mouse is hovering over, to show the magnified version of the image, and to allow the user to move the magnify glass around the image. 
                 </p>
                 <p class="body-text">
@@ -157,6 +157,7 @@ function magnify(imgID, zoom) {
                 </p>
                 <p class="body-text">
                     Lastly, this main magnify() function is called in &#60;script&#62; tag of HTML as shown. The number 3 is the amount of zoom. 
+                    * Note: I usually like to work ahead of time, so I wrote this blog post before we dove into React and Express, which is why it is more JavaScript heavy.
                     <pre class="code">
 &#60;script&#62;
     magnify("image", 3);
