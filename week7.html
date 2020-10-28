@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 7 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week6.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 7 BLOG</h2>
+            <h3 class="heading-font"> To-Do List Using React | Nov 6, 2020</h3>
+
+            <div class="body-container">
+               <p class="body-text">
+                   This week, I looked into a step-by-step tutorial on how to make a to-do list using React. 
+                   The article walks through how to start a React app, how to use useState(), and how to create components. 
+                   For this specific article, everything is done in the App.js and App.css file.
+                   Ideally, the different components would have their own individual file.
+                   The goal of this to-do list app is to create new tasks, delete tasks, and cross off completed tasks. 
+               </p>
+               <p class="body-text">
+                   The article starts off by showing what needs to be typed on the command line to create the app. 
+                   <pre class="code">
+$ npx create-react-app react-to-do
+                   </pre>
+               </p>
+               <p class="body-text">
+                   The article then instructs the reader to navigate to their project directory and run the project with the following command. 
+                   Once the user runs the command, they should navigate to localhost: 3000 and see the default React logo.
+                    <pre class="code">
+$ cd react-to-do
+$ npm start
+                    </pre>
+                </p>
+                <p class="body-text">
+                    This article does not focus on the aesthetics or styling of the to-do list; it is more focused on the functionality of the list itself. 
+                    However, the article does implement some styling in the App.css file to help display the tasks. The code is as follow:
+                    <pre class="code">
+.app {
+  background: #209cee;
+  height: 100vh;
+  padding: 30px;
+}
+
+.todo-list {
+  background: #e8e8e8;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 5px;
+}
+
+.todo {
+  align-items: center;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  font-size: 12px;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  padding: 3px 10px;
+}     
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The first step in making the actual list is to be able to read in to-do items. In the App.js file, the user can do this by using Hooks. 
+                    function App() is a functional component. The user can declare const [todos, setTodos] where todos is the name of the state and setTodos is a "method" used to set the state. 
+                    The user can initialize the list with some tasks to start off with. The text part is from Todo component that will be create after this step. 
+                    <pre class="code">
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  const [todos, setTodos] = React.useState([
+    { text: "Learn about React" },
+    { text: "Meet friend for lunch" },
+    { text: "Build really cool todo app" }
+  ]);
+
+  return (
+    // ...
+  );
+}
+
+export default App;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Next, the Todo component can be made. This component will return a div element with the todo.text. 
+                    <pre class="code">
+function Todo({ todo }) {
+  return (
+    &#60;div className="todo"&#62;
+      {todo.text}
+    &#60;/div&#62;
+  );
+}; 
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, for this step, the user can return the following from the App component. map() is used to create a new array of Todo items that will be displayed by index. 
+                    <pre class="code">
+function App() {
+  // ...
+
+  return (
+    &#60;div className="app"&#62;
+        &#60;div className="todo-list"&#62;
+        {todos.map((todo, index) => (
+            &#60;Todo
+                key={index}
+                index={index}
+                todo={todo}
+            /&#62;
+        ))}
+        &#60;/div&#62;
+    &#60;/div&#62;
+  );
+}  
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The next step is to give users the ability to create new to-do tasks. This will be done by creating a new component called TodoForm. 
+                    The form will be updated by setting the state, will start off with an empty state, and will be able to handle the submit. As tasks are added to the state, it will ideally be added to the list of to-do items. 
+                    The handleSubmit variable will handle the addTodo function and add new items to the list. Error checking also occurs. If the input box is empty and the user presses ENTER, nothing will be added to the list.
+                    <pre class="code">
+function TodoForm({ addTodo }) {
+  const [value, setValue] = React.useState("");
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (!value) return;
+    addTodo(value);
+    setValue("");
+  };
+
+  return (
+    &#60;form onSubmit={handleSubmit}&#62;
+        &#60;input
+            type="text"
+            className="input"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+      /&#62;
+    &#60;/form&#62;
+  );
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, for this step, the addTodo variable will be defined in the App component, and the TodoForm component will be added within the todo-list div in the return statement for the App component. The spread operator "..." is used to copy the list and add new to-do items. 
+                    The state will be set using the setTodos from earlier. 
+                    <pre class="code">
+&#60;TodoForm addTodo={addTodo} /&#62;
+                    </pre>
+                    <pre class="code">
+const addTodo = text => {
+    const newTodos = [...todos, { text }];
+    setTodos(newTodos);
+  };   
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The next step is adding the ability to update the todo tasks. This will be done by adding the key-value pair of isComplete: and either true or false. This will be added to the const[todos, setTodos] part of the App component. 
+                    <pre class="code">
+function App() {
+  const [todos, setTodos] = React.useState([
+    {
+      text: "Learn about React",
+      isCompleted: false
+    },
+    {
+      text: "Meet friend for lunch",
+      isCompleted: false
+    },
+    {
+      text: "Build really cool todo app",
+      isCompleted: false
+    }
+  ]);
+
+  // ...
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    A completeTodo variable will also be declared to change the isComplete status to true when the item is completed. It will make a copy of the current list of items and update the state and set the state to the newTodos. 
+                    <pre class="code">
+const completeTodo = index => {
+    const newTodos = [...todos];
+    newTodos[index].isCompleted = true;
+    setTodos(newTodos);
+  };
+                    </pre>
+                </p>
+                <p class="body-text">
+                    In the Todo component, the div with the className, "todo," will have the style attribute added. When the isComplete status is complete, there will be a link strike through the task. There will also be a button added.
+                    When the user presses this button, it will change the isComplete to true. 
+                    <pre class="code">
+function Todo({ todo, index, completeTodo }) {
+  return (
+    &#60;div
+      className="todo"
+      style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
+    &#62;
+      {todo.text}
+        &#60;div&#62;
+            &#60;button onClick={() => completeTodo(index)}>Complete&#60;/button&#62;
+        &#60;/div&#62;
+    &#60;/div&#62;
+  );
+}
+                    </pre> 
+                </p>
+                <p class="body-text">
+                    Lastly, for this step, completeTodo will be added in the Todo part of the return statement in the App componenet.
+                    <pre class="code">
+function App() {
+  // ...
+
+  return (
+    &#60;div className="app">
+        &#60;div className="todo-list"&#62;
+        {todos.map((todo, index) => (
+            &#60;Todo
+                key={index}
+                index={index}
+                todo={todo}
+                completeTodo={completeTodo}
+          /&#62;
+        ))}
+        &#60;TodoForm addTodo={addTodo} /&#62;
+        &#60;/div&#62;
+        &#60;/div&#62;
+  );
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The last step is to delete to-do task. This will be done by creating a delete button in the Todo component and defining removeTodo. The button will be added right after the complete button.  
+                    Similar to completeTodo, removeTodo will be added to the Todo part of the return statement in the App component.
+                    <pre class="code">
+function App() {
+  // ...
+
+  const removeTodo = index => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
+  return (
+    // ...
+  )
+}
+                    </pre>
+                    <pre class="code">
+&#60;button onClick={() => removeTodo(index)}&#62;x&#60;/button&#62;
+                    </pre>
+                    <pre class="code">
+&#60;Todo
+    key={index}
+    index={index}
+    todo={todo}
+    completeTodo={completeTodo}
+    removeTodo={removeTodo}
+/&#62;         
+                    </pre>
+                </p>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>Jorgenson, K. (2020, October 28). How To Build a React To-Do App with React Hooks. Retrieved October 28, 2020, from <a href="https://www.digitalocean.com/community/tutorials/how-to-build-a-react-to-do-app-with-react-hooks">https://www.digitalocean.com/community/tutorials/how-to-build-a-react-to-do-app-with-react-hooks</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
