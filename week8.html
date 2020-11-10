@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 8 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="week8.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 8 BLOG</h2>
+            <h3 class="heading-font"> Redux Overview | Nov 13, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    In order to have a more in-depth understanding of Redux, this week, I explored an article that discusses that key terms and concepts of the library. 
+                    "Redux is a pattern and library for managing and updating application state, using events called actions" ("Redux Essentials, Part 1: Redux Overview and Concepts").
+                    Redux is useful for managing states that are needed across many parts of the application. 
+                    It provides organization and predictability to when/how/where states change.
+                </p>
+                <p class="body-text">
+                    Firstly, I'll focus on is state management. The article provides an example of a React counter component. This component tracks a number within its state and increments that number when a button is clicked. 
+                    <pre class="code">
+function Counter() {
+  // State: a counter value
+  const [counter, setCounter] = useState(0)
+
+  // Action: code that causes an update to the state when something happens
+  const increment = () => {
+    setCounter(prevCounter => prevCounter + 1)
+  }
+
+  // View: the UI definition
+  return (
+    &#60;div&#62;
+      Value: {counter} &#60;button onClick={increment}>Increment&#60;/button&#62;
+    &#60;/div&#62;
+  )
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The article described state as a "source of truth that drives the app". The view is a "description of the UI based on the current state". 
+                    The actions are "the events that occur in the app based on the user input, and triggers updates in the state". 
+                    The article explains that this is an example of "one-way data flow". 
+                    This is because the state is the app's condition at a specific point in time. The UI renders based on that state. The state is updated when an action occurs. The UI re-renders based on that new state. This resembles a cycle that is continously in effect. 
+                    This pattern is useful when multiple components need to share and use the same states. This is where the tree hierarchy that was discussed in the lecture videos come in. Those shared states can be put into a centralized location outside of the component tree. 
+                </p>
+                <p class="body-text">
+                    The article then highlights Redux terminology with examples. 
+                </p>
+                <p class="body-text">
+                    The article describes an action as a "plain JavaScript object that has a type field" or an event that describes something in the applicaiton. 
+                    The type field in the object should be in the format of "domain/eventName" where domain is the category that the action belongs to and the eventName is the name of the thing that happened. 
+                    It also has a field called payload that stores additional information. 
+                    <pre class="code">
+const addTodoAction = {
+  type: 'todos/todoAdded',
+  payload: 'Buy milk'
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The article describes an action creator as "a function that create and returns an action object".
+                    This is useful since the action can just be referred to by name instead of having to be rewritten each time. 
+                    <pre class="code">
+const addTodo = text => {
+  return {
+    type: 'todos/todoAdded',
+    payload: text
+  }
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The article defines a reducer as "a function that recieves the current state and an action object, decides how to update the state if necessary, and returns the new state: (state, action) => newState". 
+                    A reducer is similar in idea as an event listener. 
+                    Reducers must follow specific rules. The new state should only be calculated based on the state and action arguments. 
+                    Reducers cannot modify the existing state. They must make immutable updates by copying the existing state and makign changes to that. 
+                    Lastly, reducers should not cause any other side effects. 
+                    The logic of reducer functions follow a similar pattern. 
+                    Check if the reducer cares about the action. If it does, then copy that state and update the copied state with new values. Then return that copied state. 
+                    If it doesn't, then return the existing state. If statements or switch cases can be used for this.
+                    <pre class="code">
+const initialState = { value: 0 }
+
+function counterReducer(state = initialState, action) {
+  // Check to see if the reducer cares about this action
+  if (action.type === 'counter/increment') {
+    // If so, make a copy of `state`
+    return {
+      ...state,
+      // and update the copy with the new value
+      value: state.value + 1
+    }
+  }
+  // otherwise return the existing state unchanged
+  return state
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The article describes a store as "an object that stores the current Redux application state". 
+                    It takes in a reducer as its argument and has a function called getState that returns the current state value. 
+                    <pre class="code">
+import { configureStore } from '@reduxjs/toolkit'
+
+const store = configureStore({ reducer: counterReducer })
+
+console.log(store.getState())
+// {value: 0}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Dispatch is a method that is used to update the state. 
+                    This is done by calling store.dispatch(). It takes in an action object as its argument. 
+                    The store will run the reducer function and save the new state value. 
+                    getState() can be used to retrieve the updated state. 
+                    Dispatching can be thought of as triggering an event. The store takes in a reducer, which is an event listener, so it listens for that triggered event. 
+                    <pre class="code">
+const increment = () => {
+  return {
+    type: 'counter/increment'
+  }
+}
+
+store.dispatch(increment())
+
+console.log(store.getState())
+// {value: 2}  
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The last terminology defined is selectors. Selectors "are functions that know how to extract specific pieces of information from a store state value". 
+                    <pre class="code">
+const selectCounterValue = state => state.value
+
+const currentValue = selectCounterValue(store.getState())
+console.log(currentValue)
+// 2
+                    </pre>
+                </p>
+                <p class="body-text">
+                    The article lastly revisits the "one way data flow" idea discussed earlier. 
+                    It goes into more detail about the initial setup. 
+                    The initial state comes from the Redux store that takes in a root reducer function. 
+                    When the UI first renders, its components access the current state of the Redux store. 
+                    It renders based on the data from that state. 
+                    Updates occur when something happens in the app. Dispatch then dispatches an action. The Redux store then runs the reducer function and returns a new state. 
+                    The UI updates based on that new state. 
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>Redux Essentials, Part 1: Redux Overview and Concepts. (n.d.). Retrieved November 06, 2020, from https://redux.js.org/tutorials/essentials/part-1-overview-concepts</li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
