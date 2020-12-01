@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <meta charset="utf-8">
+       <meta name="author" content="Vivian Dang">
+       <meta name="description" content="Web Dev Weekly Blog">
+       <meta lang="en">
+       <link rel="icon" href="images/laptop.png">
+       <link rel="stylesheet" href="stylesheets/main.css">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&display=swap">
+       <title>WEEK 9 BLOG</title> 
+    </head>
+
+    <body>
+        <header>
+            <h1 class="heading-font">
+                BLOG
+            </h1>
+        </header>
+        <main>
+            <nav>
+                <div class="nav-bar">
+                    <ul>
+                        <li class="nav-content"><a href="index.html" title="Home">HOME</a></li>
+                        <li class="nav-content"><a href="review.html" title="New Post">NEW POST</a></li>
+                        <li class="nav-content"><a href="weeklyblog.html" title="Weekly Blogs">WEEKLY BLOGS</a></li>
+                        <li class="nav-content"><a href="about.html" title="About">ABOUT</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <h2 class="heading-font">WEEK 9 BLOG</h2>
+            <h3 class="heading-font"> React JSX, Props, and Components | Nov 20, 2020</h3>
+
+            <div class="body-container">
+                <p class="body-text">
+                    As we learn more about React, the idea of props, components, and JSX still kind of confuses me, so this week, I explored documentation that further explain these parts of React. 
+                    These pages of documentation comes from the official React website. 
+                    It explains these concepts by providing examples and showing how the concepts interact with each other. 
+                </p>
+                <p class="body-text">
+                    Firstly, we'll explore JSX. The documentation describes JSX as a syntax extension to JavaScript. 
+                    It is recommended to be used with React to determine what the UI should look like. JSX produces React elements. 
+                    The documentation provides the following example. 
+                    <pre class="code">
+const name = 'Josh Perez';
+const element = &#60;h1&#62;Hello, {name}&#60;/h1&#62;;
+
+function formatName(user) {
+    return user.firstName + ' ' + user.lastName;
+  }
+  
+  const user = {
+    firstName: 'Harper',
+    lastName: 'Perez'
+  };
+  
+  const element = (
+    &#60;h1&#62;
+      Hello, {formatName(user)}!
+    &#60;/h1&#62;
+  );
+  
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+
+                    </pre>
+                </p>
+                <p class="body-text">
+                    As exemplified by the {name} and {formatName(user)}, any valid JavaScript expressions can go inside of curly braces. Valid expressions include functions, object properties, and variables. 
+                </p>
+                <p class="body-text">
+                    The documentation then describes JSX as an expression as well. After compilation, JSX expressions become regular JavaScript objects and function calls. 
+                    This allows developers to assign JSX to variables, accept it as arguments, return it from functions, and use it inside of if statements or for loops. 
+                </p>
+                <p class="body-text">
+                    The documentation then talks about specifying attributes with JSX. Quotes can be used to specify string literals as attributes. 
+                    Curly braces can also be used to specify attributes that are expressions. Only either quotes or curly braces can be used for one attribute, never both. 
+                    <pre class="code">
+// Quotes                        
+const element = &#60;div tabIndex="0"&#62;&#60;/div&#62;;
+
+// Curly Braces 
+const element = &#60;img src={user.avatarUrl}&#62;&#60;/img&#62;;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Additionally, if a tag is empty, it can just be immediately closed with />. Furthermore, JSX tags may contain children as demonstrated by the following example. 
+                    <pre class="code">
+const element = (
+  &#60;div&#62;
+    &#60;h1>Hello!&#60;/h1&#62;
+    &#60;h2>Good to see you here.&#60;/h2&#62;
+  &#60;/div&#62;
+);    
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, the documentation explains that JSX represents objects called React elements. They essentially represent what is displayed on the screen. The two following blocks of code represent the same thing. 
+                    <pre class="code">
+const element = (
+  &#60;h1 className="greeting"&#62;
+    Hello, world!
+  &#60;/h1&#62;
+);
+
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
+                    </pre> 
+                </p>
+                <p class="body-text">
+                    We'll now explore React components and props. The documentation states that components allow you to split up the UI into independent, reusable pieces. 
+                    It states that "components are conceptually JavaScript functions that accept arbitrary inputs called props and return React elements that describe what should appear on the screen."
+                    This means that we can make components by writing JavaScript functions as exemplified below. 
+                    <pre class="code">
+function Welcome(props) {
+  return &#60;h1&#62;Hello, {props.name}&#60;/h1&#62;
+}      
+                    </pre>
+                </p>
+                <p class="body-text">
+                    These components can then be rendered by doing the following. 
+                    <pre class="code">
+const element = &#60;Welcome name="Sara" /&#62;;
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Components can also consist of other components. React apps usually have a top-level App component that can consist of other components as demonstrated. 
+                    <pre class="code">
+function App() {
+  return (
+    &#60;div&#62;
+      &#60;Welcome name="Sara" /&#62;
+      &#60;Welcome name="Cahal" /&#62;
+      &#60;Welcome name="Edite" /&#62;
+    &#60;/div&#62;
+  );
+}
+                    </pre>
+                </p>
+                <p class="body-text">
+                    Lastly, the documentation describes how props are read only. Components should never modify its own props. 
+                </p>
+            </div>
+            <div class="body-container">
+                <p class="body-text">
+                    <ul>
+                        <li>References:</li>
+                        <li>Components and Props. (n.d.). Retrieved November 13, 2020, from <a href="https://reactjs.org/docs/components-and-props.html">https://reactjs.org/docs/components-and-props.html</a></li>
+                        <li>Introducing JSX. (n.d.). Retrieved November 13, 2020, from <a href="https://reactjs.org/docs/introducing-jsx.html">https://reactjs.org/docs/introducing-jsx.html</a></li>
+                    </ul>
+                </p>
+            </div>
+        </main>
+        <footer>
+            <ul class="footer">
+                <li>
+                    &copy; 2020 VIVIAN DANG
+                </li>
+                <li>
+                    ICONS MADE BY <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> FROM <a href="https://www.flaticon.com/" title="Flaticon">Flaticon</a>
+                </li>
+            </ul>  
+        </footer>
+    </body>
+
+</html>
